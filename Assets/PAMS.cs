@@ -8,21 +8,21 @@ public class PAMS : MonoBehaviour
 {
     //public TextMeshPro moneyT; //text for the money
     //public TextMeshPro timerT; //text for the timer
-    //--------------------------panels-----------------------
-    public GameObject frontPgP;
-    public GameObject fishingTimesP;
-    public GameObject upgradesP;
-    public GameObject collectionLogP;
-    public  GameObject settingsP;
+    public List<GameObject> panels;
+    public int panelIndex;
+
+    public List<Button> buttons;
+    public int buttonIndex;
 
     // Start is called before the first frame update
     void Start()
     {
-        frontPgP.SetActive(true);
-        fishingTimesP.SetActive(false);
-        upgradesP.SetActive(false);
-        collectionLogP.SetActive(false);
-        settingsP.SetActive(false);
+        panels[0].SetActive(true);
+        panels[1].SetActive(false);
+        panels[2].SetActive(false);
+        panels[3].SetActive(false);
+        panels[4].SetActive(false);
+        
     }
 
     // Update is called once per frame
@@ -35,43 +35,65 @@ public class PAMS : MonoBehaviour
     public void FishingTimes()
     {
         Debug.Log("fishing times is open");
-        frontPgP.SetActive(false);
-        fishingTimesP.SetActive(true);
-        upgradesP.SetActive(false);
-        collectionLogP.SetActive(false);
-        settingsP.SetActive(false);
+        panels[0].SetActive(false);
+        panels[1].SetActive(true);
+        panels[2].SetActive(false);
+        panels[3].SetActive(false);
+        panels[4].SetActive(false);
+        buttons[0].transform.SetAsLastSibling();
+        buttons[1].transform.SetAsFirstSibling();
+        buttons[2].transform.SetAsFirstSibling();
+        buttons[3].transform.SetAsFirstSibling();
+
     }
 
     // used for when the Upgrades button to open that panel when the button is clicked on
     public void Upgrades()
     {
         Debug.Log("upgrades is open");
-        frontPgP.SetActive(false);
-        fishingTimesP.SetActive(false);
-        upgradesP.SetActive(true);
-        collectionLogP.SetActive(false);
-        settingsP.SetActive(false);
+        panels[0].SetActive(false);
+        panels[1].SetActive(false);
+        panels[2].SetActive(true);
+        panels[3].SetActive(false);
+        panels[4].SetActive(false);
+        buttons[0].transform.SetAsFirstSibling();
+        buttons[1].transform.SetAsLastSibling();
+        buttons[2].transform.SetAsFirstSibling();
+        buttons[3].transform.SetAsFirstSibling();
+
     }
 
     // used for when the colection log button to open that panel when the button is clicked on
     public void CollectionLog()
     {
         Debug.Log("collection log is open");
-        frontPgP.SetActive(false);
-        fishingTimesP.SetActive(false);
-        upgradesP.SetActive(false);
-        collectionLogP.SetActive(true);
-        settingsP.SetActive(false);
+        panels[0].SetActive(false);
+        panels[1].SetActive(false);
+        panels[2].SetActive(false);
+        panels[3].SetActive(true);
+        panels[4].SetActive(false);
+        buttons[0].transform.SetAsFirstSibling();
+        buttons[1].transform.SetAsFirstSibling();
+        buttons[2].transform.SetAsLastSibling();
+        buttons[3].transform.SetAsFirstSibling();
+ 
+
     }
 
     // used for when the settings button to open that panel when the button is clicked on
     public void Settings()
     {
         Debug.Log("settings is open");
-        frontPgP.SetActive(false);
-        fishingTimesP.SetActive(false);
-        upgradesP.SetActive(false);
-        collectionLogP.SetActive(false);
-        settingsP.SetActive(true);
+        panels[0].SetActive(false);
+        panels[1].SetActive(false);
+        panels[2].SetActive(false);
+        panels[3].SetActive(false);
+        panels[4].SetActive(true);
+        buttons[0].transform.SetAsFirstSibling();
+        buttons[1].transform.SetAsFirstSibling();
+        buttons[2].transform.SetAsFirstSibling();
+        buttons[3].transform.SetAsLastSibling();
+
+
     }
 }
