@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GMS : MonoBehaviour
 {
-    
+    public float fishingTime;
     // Start is called before the first frame update
     void Start()
     {
