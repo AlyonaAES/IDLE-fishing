@@ -31,21 +31,6 @@ public class PAMS : MonoBehaviour
         
     }
 
-// used for when the fishing times button to open that panel when the button is clicked on
-    public void FishingTimes()
-    {
-        Debug.Log("fishing times is open");
-        panels[0].SetActive(false);
-        panels[1].SetActive(true);
-        panels[2].SetActive(false);
-        panels[3].SetActive(false);
-        panels[4].SetActive(false);
-        buttons[0].transform.SetAsLastSibling();
-        buttons[1].transform.SetAsFirstSibling();
-        buttons[2].transform.SetAsFirstSibling();
-        buttons[3].transform.SetAsFirstSibling();
-
-    }
 
     // used for when the Upgrades button to open that panel when the button is clicked on
     public void Upgrades()
@@ -57,9 +42,12 @@ public class PAMS : MonoBehaviour
         panels[3].SetActive(false);
         panels[4].SetActive(false);
         buttons[0].transform.SetAsFirstSibling();
-        buttons[1].transform.SetAsLastSibling();
-        buttons[2].transform.SetAsFirstSibling();
+        buttons[1].transform.SetAsFirstSibling();
+        buttons[1].interactable = false;
+        buttons[2].transform.SetAsLastSibling();
         buttons[3].transform.SetAsFirstSibling();
+        buttons[4].transform.SetAsFirstSibling();
+
 
     }
 
@@ -74,8 +62,11 @@ public class PAMS : MonoBehaviour
         panels[4].SetActive(false);
         buttons[0].transform.SetAsFirstSibling();
         buttons[1].transform.SetAsFirstSibling();
-        buttons[2].transform.SetAsLastSibling();
-        buttons[3].transform.SetAsFirstSibling();
+        buttons[1].interactable = false;
+        buttons[2].transform.SetAsFirstSibling();
+        buttons[3].transform.SetAsLastSibling();
+        buttons[4].transform.SetAsFirstSibling();
+
  
 
     }
@@ -91,8 +82,11 @@ public class PAMS : MonoBehaviour
         panels[4].SetActive(true);
         buttons[0].transform.SetAsFirstSibling();
         buttons[1].transform.SetAsFirstSibling();
+        buttons[1].interactable = false;
         buttons[2].transform.SetAsFirstSibling();
-        buttons[3].transform.SetAsLastSibling();
+        buttons[3].transform.SetAsFirstSibling();
+        buttons[4].transform.SetAsLastSibling();
+
 
 
     }
