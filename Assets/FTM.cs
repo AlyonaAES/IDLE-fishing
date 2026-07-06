@@ -28,12 +28,17 @@ public class FTM : MonoBehaviour
     public TextMeshProUGUI curIntervalNum; // the text that shows the current interval number
     public int intervals = 0;
 
-    public bool fishingOn = false;
-    public bool fishingST = false;
-    public bool fishingBT = false;
+    public Button STARTFISHING; // button for start of fishing
 
-    public float fishingTimer;
-    public float fishingBreakTimer;
+    public bool fishingOn = false; //status check for seeing if the player is ready to fish
+    public bool fishingST = false; //ststaus check for seeing if the player should be studying 
+    public bool fishingBT = false; // status check for seeing if the player is on break
+
+    public TextMeshProUGUI countdownTimer; //text that has the countdown timer when fishing
+    //public TextMeshProUGUI intervalText; // text that has the the nums of intervals left
+    public float fishingTimer; // the timer that counts down when fishing
+    public float fishingBreakTimer;// the timer that counts down when taking a break
+    public int intervalRN; // the current interval rn 
 
 
 
@@ -42,6 +47,7 @@ public class FTM : MonoBehaviour
     void Start()
     {
         studyTime = 10;
+        countdownTimer.text = "";
         //sets the incrST to call IncreaseTimes when clicked
         incrST.onClick.AddListener(() => IncreaseTimes(1));
         //sets the decrST to call decreaseTimes when clicked
@@ -52,6 +58,7 @@ public class FTM : MonoBehaviour
         decrBT.onClick.AddListener(() => decreaseTimes(2));
         incrI.onClick.AddListener(() => IncreaseStudyIntervals());
         decrI.onClick.AddListener(() => decreaseStudyIntervals());
+        STARTFISHING.onClick.AddListener(() => startStudy());
     }
 
     // Update is called once per frame
@@ -78,7 +85,42 @@ public class FTM : MonoBehaviour
         }
         else if(fishingOn == true)
         {
-            
+            //timer for fishing
+            if(fishingST == true)
+            {
+                fishingTimer -= Time.deltaTime;
+                fishingTimer = MathF.Round(fishingTimer);
+                //text for fishing
+                //text for intervals
+                countdownTimer.text = "" + fishingTimer;
+
+                if(fishingTimer <= 0)
+                {
+                    intervalRN --;
+                    fishingBT = true;
+                    fishingST = false;
+                }
+            }
+            //timer for break           
+            if(fishingST == true && intervalRN > 0)
+            {
+                fishingBreakTimer -= Time.deltaTime;
+                fishingBreakTimer = MathF.Round(fishingBreakTimer);
+                //text for fishing
+                //text for intervals
+                countdownTimer.text = "" + fishingBreakTimer;
+
+                if(fishingBreakTimer <= 0)
+                {
+                    fishingST = true;
+                    fishingBT = false;
+                }
+            }
+            if(intervalRN == 0)
+            {
+                fishingOn = false;
+                buttons[0].interactable = true;
+            }
         }
     }
 
@@ -161,8 +203,9 @@ public class FTM : MonoBehaviour
     {
         fishingOn = true;
         fishingST = true;
-        fishingTimer = studyTime;
-        fishingBreakTimer = breakTime;
+        fishingTimer = studyTime*60;
+        fishingBreakTimer = breakTime*60;
+        intervalRN = intervals;
 
 
         panels[0].SetActive(true);

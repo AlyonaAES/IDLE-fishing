@@ -681,7 +681,6 @@ MonoBehaviour:
   panels:
   - {fileID: 395777185}
   - {fileID: 1486579895}
-  - {fileID: 0}
   - {fileID: 2092774381}
   - {fileID: 398889031}
   - {fileID: 437078521}
@@ -694,16 +693,23 @@ MonoBehaviour:
   incrST: {fileID: 1898836199}
   decrST: {fileID: 1444072160}
   curStudyTime: {fileID: 10026636}
-  studyTimer: 10
+  studyTime: 10
   incrBT: {fileID: 960459155}
   decrBT: {fileID: 2087182594}
   curBreakTime: {fileID: 849472047}
-  breakTimer: 10
+  breakTime: 10
   incrI: {fileID: 1251878919}
   decrI: {fileID: 5933263}
   curIntervalNum: {fileID: 771800267}
   intervals: 1
+  STARTFISHING: {fileID: 854617884}
   fishingOn: 0
+  fishingST: 0
+  fishingBT: 0
+  countdownTimer: {fileID: 1596219641}
+  fishingTimer: 0
+  fishingBreakTimer: 0
+  intervalRN: 0
 --- !u!4 &152186380
 Transform:
   m_ObjectHideFlags: 0
@@ -3737,7 +3743,6 @@ MonoBehaviour:
   panels:
   - {fileID: 395777185}
   - {fileID: 1486579895}
-  - {fileID: 0}
   - {fileID: 2092774381}
   - {fileID: 398889031}
   - {fileID: 437078521}
