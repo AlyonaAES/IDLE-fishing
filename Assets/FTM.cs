@@ -89,10 +89,32 @@ public class FTM : MonoBehaviour
             if(fishingST == true)
             {
                 fishingTimer -= Time.deltaTime;
-                fishingTimer = MathF.Round(fishingTimer);
                 //text for fishing
                 //text for intervals
-                countdownTimer.text = "" + fishingTimer;
+                //countdownTimer.text = "" + MathF.Round(fishingTimer);
+                
+                float hour = Mathf.Round(fishingTimer/3600);
+                float min = MathF.Round((fishingTimer%3600)/60);
+                float sec = MathF.Round(fishingTimer%60);
+                Debug.Log("reg time:" + fishingTimer);
+                Debug.Log("hours:" + hour);
+                Debug.Log("mins:" + min);
+                Debug.Log("secs:" + sec);
+
+
+                //RN THE COUNTDOWN TIMER IS ONE MIN TOO MUCH, FIX THAT FUTURE ME LOL
+                if(hour > 0)
+                {
+                    countdownTimer.text = "" + hour + ":" + min + ":" + sec;
+                }
+                else if(fishingTimer % 60 < 60 && fishingTimer >= 1)
+                {
+                    countdownTimer.text = "" + min + ":" + sec;
+                }
+                else if(fishingTimer <= 60)
+                {
+                    countdownTimer.text = "" + sec;
+                }
 
                 if(fishingTimer <= 0)
                 {
@@ -102,13 +124,12 @@ public class FTM : MonoBehaviour
                 }
             }
             //timer for break           
-            if(fishingST == true && intervalRN > 0)
+            if(fishingST == false && intervalRN > 0)
             {
                 fishingBreakTimer -= Time.deltaTime;
-                fishingBreakTimer = MathF.Round(fishingBreakTimer);
                 //text for fishing
                 //text for intervals
-                countdownTimer.text = "" + fishingBreakTimer;
+                countdownTimer.text = "" + Mathf.Round(fishingBreakTimer);
 
                 if(fishingBreakTimer <= 0)
                 {
@@ -221,4 +242,6 @@ public class FTM : MonoBehaviour
         buttons[3].transform.SetAsFirstSibling();
         buttons[4].transform.SetAsFirstSibling();
     }
+
+
 }

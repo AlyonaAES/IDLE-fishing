@@ -35,7 +35,6 @@ public class PAMS : MonoBehaviour
     // used for when the Upgrades button to open that panel when the button is clicked on
     public void Upgrades()
     {
-        Debug.Log("upgrades is open");
         panels[0].SetActive(false);
         panels[1].SetActive(false);
         panels[2].SetActive(true);
@@ -54,7 +53,6 @@ public class PAMS : MonoBehaviour
     // used for when the colection log button to open that panel when the button is clicked on
     public void CollectionLog()
     {
-        Debug.Log("collection log is open");
         panels[0].SetActive(false);
         panels[1].SetActive(false);
         panels[2].SetActive(false);
@@ -74,7 +72,6 @@ public class PAMS : MonoBehaviour
     // used for when the settings button to open that panel when the button is clicked on
     public void Settings()
     {
-        Debug.Log("settings is open");
         panels[0].SetActive(false);
         panels[1].SetActive(false);
         panels[2].SetActive(false);
