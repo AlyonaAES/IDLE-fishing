@@ -30,7 +30,7 @@ public class FTM : MonoBehaviour
 
     public Button STARTFISHING; // button for start of fishing
 
-    public bool fishingOn = false; //status check for seeing if the player is ready to fish
+    public bool fishingOn = false; //status check for seeing if the player is ready to fish 
     public bool fishingST = false; //ststaus check for seeing if the player should be studying 
     public bool fishingBT = false; // status check for seeing if the player is on break
 
@@ -40,6 +40,7 @@ public class FTM : MonoBehaviour
     public float fishingBreakTimer;// the timer that counts down when taking a break
     public int intervalRN; // the current interval rn 
 
+    public GameObject WFM; // script of the while fishing manager;
 
 
 
@@ -93,13 +94,13 @@ public class FTM : MonoBehaviour
                 //text for intervals
                 //countdownTimer.text = "" + MathF.Round(fishingTimer);
                 
-                float hour = Mathf.Round(fishingTimer/3600);
-                float min = MathF.Round((fishingTimer%3600)/60);
-                float sec = MathF.Round(fishingTimer%60);
-                Debug.Log("reg time:" + fishingTimer);
-                Debug.Log("hours:" + hour);
-                Debug.Log("mins:" + min);
-                Debug.Log("secs:" + sec);
+                float hour = Mathf.Floor(fishingTimer/3600);
+                float min = MathF.Floor((fishingTimer%3600)/60);
+                float sec = MathF.Floor(fishingTimer%60);
+                // Debug.Log("reg time:" + fishingTimer);
+                // Debug.Log("hours:" + hour);
+                // Debug.Log("mins:" + min);
+                // Debug.Log("secs:" + sec);
 
 
                 //RN THE COUNTDOWN TIMER IS ONE MIN TOO MUCH, FIX THAT FUTURE ME LOL
@@ -121,6 +122,7 @@ public class FTM : MonoBehaviour
                     intervalRN --;
                     fishingBT = true;
                     fishingST = false;
+                    WFM.GetComponent<WFM>().collectFish = true;
                 }
             }
             //timer for break           
