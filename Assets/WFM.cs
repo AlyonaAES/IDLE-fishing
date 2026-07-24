@@ -6,23 +6,24 @@ using UnityEngine;
 
 public class WFM : MonoBehaviour
 {
-    public List<string> commonFish;
-    public List<string> uncommonFish;
-    public float UFchance;
+    public List<string> commonFish; // the names of the different common fish 
+    public List<string> uncommonFish; // the names of the different uncommon fish
+    public float UFchance; // the chance to get the uncommon fish
 
-    public List<string> rareFish;
-    public float RFchance;
+    public List<string> rareFish; // the names of the different rare fish 
+    public float RFchance; // the chance to get a rare fish
 
-    public List<string> mythicFish;
-    public float MFchance;
+    public List<string> mythicFish; // the names of the different mythic fish
+    public float MFchance; // the chance to get a mythic fish
 
 
-    public GameObject FTM;
-    public GameObject FCM;
+    public GameObject FTM; // the script for the fishing time manager
+    public GameObject FCM; // the script for the fish collection manager
 
-    public bool collectFish;
 
-    public List<string> foundFish;
+    public bool collectFish; // status check to see if the study timer is done and to get the fish 
+
+    public List<string> foundFish; // the fish that were found 
 
     
 
@@ -35,17 +36,22 @@ public class WFM : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //if the study timer is done then collect fish is true
         if(collectFish == true)
         {
             CollectFish();
             collectFish = false;
         }
     }
-
+    
+    //function that holds all the collection of fish 
     void CollectFish()
     {
+        //gets the amt of time that ios being studied from the FTM script 
         float min = FTM.GetComponent<FTM>().studyTime;
 
+        //GUARANTEED FISH
+        //depending on the amt of time studying you get a free fish of a certain rarity  
         if(min >= 30 && min < 60)
         {
             int randomFish = Random.Range(0, uncommonFish.Count);
@@ -74,6 +80,9 @@ public class WFM : MonoBehaviour
             Debug.Log("mythic fish: " + mythicFish[randomFish]);
         }
 
+        //ACTUALL COLLECTION OF FISH
+        //runs x amt of times where x is the amt of mins studied / 10
+        //checks from mythic -> rare -> uncommon and if the number doesnt fall under any of thoes then player gets common fish
         for(float numOfFish = Mathf.Floor(min/10); numOfFish > 0; numOfFish--)
         {
             float chance = Random.Range(0,101);
@@ -108,8 +117,25 @@ public class WFM : MonoBehaviour
                 Debug.Log("common fish: " + commonFish[randomFish]);
 
             }
-                FCM.GetComponent<FCM>().totalFish.AddRange(foundFish);
-                foundFish.Clear();
+
+            //check if the study sesh is done and moves the list to the FCM to log the found fish
+            if(FTM.GetComponent<FTM>().fishingOn == false)
+            {
+                    FishingIsDone();
+            }
+
         }
+    }
+
+    void FishingIsDone()
+    {
+        FCM.GetComponent<FCM>().totalFish.AddRange(foundFish);
+        for(int i=0; i< foundFish.Count; i++)
+        {
+            FCM.GetComponent<FCM>().discoveredFish[foundFish[i]] = true;
+            Debug.Log(foundFish[i] + " is " + FCM.GetComponent<FCM>().discoveredFish[foundFish[i]]);
+        }
+        foundFish.Clear();
+
     }
 }
